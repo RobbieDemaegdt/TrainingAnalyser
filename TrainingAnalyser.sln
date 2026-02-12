@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11505.172 d18.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainingAnalyser", "TrainingAnalyser.csproj", "{A2397E44-E942-0B8C-06E2-60A941535044}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A2397E44-E942-0B8C-06E2-60A941535044}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2397E44-E942-0B8C-06E2-60A941535044}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2397E44-E942-0B8C-06E2-60A941535044}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2397E44-E942-0B8C-06E2-60A941535044}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {29652E20-4B92-4F6D-ADA6-D5B6B1F6342F}
+	EndGlobalSection
+EndGlobal

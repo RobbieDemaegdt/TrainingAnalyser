@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Maui2.Models"
+             x:Class="Maui2.Views.HistoryPage"
+             Title="History">
+
+    <Grid RowDefinitions="Auto,Auto,*" Padding="10">
+
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,*" Margin="0,0,0,10">
+            <Label Text="Pigeon:"
+                   VerticalTextAlignment="Center"
+                   FontAttributes="Bold"
+                   Margin="0,0,8,0" />
+            <Picker Grid.Column="1"
+                    ItemsSource="{Binding Pigeons}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedPigeon}"
+                    HorizontalOptions="Fill" />
+        </Grid>
+
+        <ActivityIndicator
+            Grid.Row="1"
+            IsRunning="{Binding IsBusy}"
+            IsVisible="{Binding IsBusy}"
+            HorizontalOptions="Center" />
+
+        <ScrollView Grid.Row="2" Orientation="Horizontal">
+            <Grid RowDefinitions="Auto,*" MinimumWidthRequest="680">
+
+                <!-- Table Header -->
+                <Grid Grid.Row="0"
+                      ColumnDefinitions="70,90,45,45,45,45,45,45,45"
+                      BackgroundColor="#512BD4"
+                      Padding="8,6">
+                    <Label Text="Age"  Grid.Column="0" FontAttributes="Bold" TextColor="White" />
+                    <Label Text="Date" Grid.Column="1" FontAttributes="Bold" TextColor="White" />
+                    <Label Text="Spd"  Grid.Column="2" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="Stm"  Grid.Column="3" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="Nav"  Grid.Column="4" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="Tec"  Grid.Column="5" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="Aer"  Grid.Column="6" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="Int"  Grid.Column="7" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="Tot"  Grid.Column="8" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                </Grid>
+
+                <!-- Table Rows -->
+                <CollectionView Grid.Row="1" ItemsSource="{Binding Snapshots}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:HistoryRow">
+                            <Grid ColumnDefinitions="70,90,45,45,45,45,45,45,45"
+                                  Padding="8,4">
+                                <Label Text="{Binding Age}"  Grid.Column="0" />
+                                <Label Text="{Binding Date}" Grid.Column="1" />
+                                <Label Text="{Binding Spd}"  Grid.Column="2" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding Stm}"  Grid.Column="3" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding Nav}"  Grid.Column="4" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding Tec}"  Grid.Column="5" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding Aer}"  Grid.Column="6" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding Intl}" Grid.Column="7" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding Tot}"  Grid.Column="8" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.EmptyView>
+                        <Label Text="No history recorded yet. Stats are tracked each time your pigeons age."
+                               HorizontalTextAlignment="Center"
+                               Margin="0,20"
+                               Opacity="0.6" />
+                    </CollectionView.EmptyView>
+                </CollectionView>
+
+            </Grid>
+        </ScrollView>
+
+    </Grid>
+
+</ContentPage>

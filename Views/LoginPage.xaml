@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Maui2.Views.LoginPage"
+             Title="Login"
+             Shell.NavBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30"
+            Spacing="20"
+            VerticalOptions="Center"
+            MaximumWidthRequest="400">
+
+            <Label
+                Text="Pigeon Fancier"
+                FontSize="28"
+                FontAttributes="Bold"
+                HorizontalTextAlignment="Center" />
+
+            <Label
+                Text="Sign in to track your pigeons"
+                FontSize="16"
+                HorizontalTextAlignment="Center"
+                Opacity="0.7" />
+
+            <Entry
+                x:Name="EmailEntry"
+                Placeholder="Email"
+                Keyboard="Email"
+                Text="{Binding Email}"
+                ReturnType="Next" />
+
+            <Entry
+                x:Name="PasswordEntry"
+                Placeholder="Password"
+                IsPassword="True"
+                Text="{Binding Password}"
+                ReturnType="Done" />
+
+            <HorizontalStackLayout Spacing="10">
+                <CheckBox
+                    IsChecked="{Binding RememberMe}" />
+                <Label
+                    Text="Remember me"
+                    VerticalTextAlignment="Center" />
+            </HorizontalStackLayout>
+
+            <Label
+                Text="{Binding ErrorMessage}"
+                TextColor="Red"
+                FontSize="14"
+                HorizontalTextAlignment="Center"
+                IsVisible="{Binding ErrorMessage, Converter={StaticResource IsNotNullConverter}}" />
+
+            <Button
+                Text="Login"
+                Command="{Binding LoginCommand}"
+                HorizontalOptions="Fill" />
+
+            <ActivityIndicator
+                IsRunning="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}"
+                HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
