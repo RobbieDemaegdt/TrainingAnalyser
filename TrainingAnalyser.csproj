@@ -28,14 +28,19 @@
 		<MauiXamlInflator>SourceGen</MauiXamlInflator>
 
 		<!-- Display name -->
-		<ApplicationTitle>Maui2</ApplicationTitle>
+		<ApplicationTitle>Training Analyser</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.maui2</ApplicationId>
+		<ApplicationId>net.demaegdt.traininganalyser</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
+		
+		<!-- Publisher/Author -->
+		<Authors>Robbie Demaegdt</Authors>
+		<Company>Demaegdt</Company>
+		<Product>Training Analyser</Product>
 
 		<!-- To develop, package, and publish an app to the Microsoft Store, see: https://aka.ms/MauiTemplateUnpackaged -->
 		<WindowsPackageType>None</WindowsPackageType>
