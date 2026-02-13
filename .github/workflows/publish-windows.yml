@@ -41,7 +41,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: TrainingAnalyser-win-x64
-          path: ./TrainingAnalyser-win-x64.zip
+          path: ./publish/
 
       - name: Upload release asset
         if: github.event_name == 'release'
