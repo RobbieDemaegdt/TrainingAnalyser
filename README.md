@@ -9,7 +9,6 @@ A cross-platform application built with .NET MAUI (Multi-platform App UI).
 
 ## Target Platforms
 
-- Android
 - iOS
 - macOS (Mac Catalyst)
 - Windows
@@ -22,9 +21,6 @@ dotnet restore
 
 # Build for Windows
 dotnet build -f net10.0-windows10.0.19041.0
-
-# Build for Android
-dotnet build -f net10.0-android
 ```
 
 ## Run
