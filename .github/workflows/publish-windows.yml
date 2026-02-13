@@ -1,0 +1,49 @@
+name: Publish Windows Release
+
+on:
+  release:
+    types: [created]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Install MAUI workload
+        run: dotnet workload install maui-windows
+
+      - name: Publish self-contained Windows app
+        run: >
+          dotnet publish TrainingAnalyser.csproj
+          -f net10.0-windows10.0.19041.0
+          -c Release
+          -r win-x64
+          --self-contained true
+          -o ./publish
+
+      - name: Create release archive
+        run: Compress-Archive -Path ./publish/* -DestinationPath ./TrainingAnalyser-win-x64.zip
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: TrainingAnalyser-win-x64
+          path: ./TrainingAnalyser-win-x64.zip
+
+      - name: Upload release asset
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ./TrainingAnalyser-win-x64.zip
