@@ -21,12 +21,17 @@ public static class MauiProgram
 		builder.Services.AddSingleton<AuthService>();
 		builder.Services.AddSingleton<Maui2.Services.PigeonService>();
 		builder.Services.AddSingleton<Maui2.Services.HistoryService>();
+		builder.Services.AddSingleton<Maui2.Services.TransferService>();
 		builder.Services.AddTransient<LoginViewModel>();
 		builder.Services.AddTransient<Maui2.ViewModels.MainViewModel>();
 		builder.Services.AddTransient<Maui2.ViewModels.HistoryViewModel>();
+		builder.Services.AddTransient<Maui2.ViewModels.TransferViewModel>();
+		builder.Services.AddTransient<Maui2.ViewModels.CompletedTransferViewModel>();
 		builder.Services.AddTransient<LoginPage>();
 		builder.Services.AddTransient<MainPage>();
 		builder.Services.AddTransient<Maui2.Views.HistoryPage>();
+		builder.Services.AddTransient<Maui2.Views.TransferPage>();
+		builder.Services.AddTransient<Maui2.Views.CompletedTransferPage>();
 
 #if DEBUG
 		builder.Logging.AddDebug();

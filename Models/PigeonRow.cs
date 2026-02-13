@@ -12,6 +12,10 @@ public class PigeonRow
 	public string Aer { get; set; } = string.Empty;
 	public string Intl { get; set; } = string.Empty;
 	public string Tot { get; set; } = string.Empty;
+	public string Frm { get; set; } = string.Empty;
+	public string Exp { get; set; } = string.Empty;
+	public string Lib { get; set; } = string.Empty;
+	public string Nv { get; set; } = string.Empty;
 
 	public static PigeonRow FromPigeon(Pigeon pigeon, string resolvedName)
 	{
@@ -31,7 +35,11 @@ public class PigeonRow
 			Tec = FormatSkill((skills?.Technique ?? 0) + 1, training, "technique"),
 			Aer = FormatSkill((skills?.Aerodynamics ?? 0) + 1, training, "aerodynamics"),
 			Intl = FormatSkill((skills?.Intelligence ?? 0) + 1, training, "intelligence"),
-			Tot = ((skills?.Total ?? 0) + skillCount).ToString()
+			Tot = ((skills?.Total ?? 0) + skillCount).ToString(),
+			Frm = ((skills?.Form ?? 0) + 1).ToString(),
+			Exp = ((skills?.Experience ?? 0) + 1).ToString(),
+			Lib = ((skills?.Libido ?? 0) + 1).ToString(),
+			Nv = ((skills?.Nightvision ?? 0) + 1).ToString()
 		};
 	}
 

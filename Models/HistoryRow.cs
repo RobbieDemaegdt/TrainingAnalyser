@@ -2,6 +2,7 @@ namespace Maui2.Models;
 
 public class HistoryRow
 {
+	public int TotalMonths { get; set; }
 	public string Age { get; set; } = string.Empty;
 	public string Date { get; set; } = string.Empty;
 	public string Spd { get; set; } = string.Empty;
@@ -11,6 +12,10 @@ public class HistoryRow
 	public string Aer { get; set; } = string.Empty;
 	public string Intl { get; set; } = string.Empty;
 	public string Tot { get; set; } = string.Empty;
+	public string Frm { get; set; } = string.Empty;
+	public string Exp { get; set; } = string.Empty;
+	public string Lib { get; set; } = string.Empty;
+	public string Nv { get; set; } = string.Empty;
 
 	public static List<HistoryRow> FromSnapshots(List<PigeonSnapshot> snapshots)
 	{
@@ -24,6 +29,7 @@ public class HistoryRow
 
 			rows.Add(new HistoryRow
 			{
+				TotalMonths = current.TotalMonths,
 				Age = $"{current.TotalMonths / 12}y {current.TotalMonths % 12}m",
 				Date = current.RecordedAt.ToString("dd/MM/yyyy"),
 				Spd = FormatDelta(current.Speed + 1, previous?.Speed),
@@ -32,7 +38,11 @@ public class HistoryRow
 				Tec = FormatDelta(current.Technique + 1, previous?.Technique),
 				Aer = FormatDelta(current.Aerodynamics + 1, previous?.Aerodynamics),
 				Intl = FormatDelta(current.Intelligence + 1, previous?.Intelligence),
-				Tot = FormatDelta(current.Total + 6, previous?.Total, totalOffset: true)
+				Tot = FormatDelta(current.Total + 6, previous?.Total, totalOffset: true),
+				Frm = FormatDelta(current.Form + 1, previous?.Form),
+				Exp = FormatDelta(current.Experience + 1, previous?.Experience),
+				Lib = FormatDelta(current.Libido + 1, previous?.Libido),
+				Nv = FormatDelta(current.Nightvision + 1, previous?.Nightvision)
 			});
 		}
 

@@ -53,20 +53,26 @@ public class HistoryService
 
 			history.Name = nameResolver(pigeon);
 
-			var latestSnapshot = history.Snapshots
-				.OrderByDescending(s => s.TotalMonths)
-				.FirstOrDefault();
-
 			var currentSnapshot = PigeonSnapshot.FromPigeon(pigeon);
 
-			if (latestSnapshot is null
-				|| latestSnapshot.TotalMonths != currentSnapshot.TotalMonths
-				|| !latestSnapshot.HasSameStats(currentSnapshot))
-			{
-				history.Snapshots.Add(currentSnapshot);
-				changed = true;
+				var existing = history.Snapshots
+					.FirstOrDefault(s => s.TotalMonths == currentSnapshot.TotalMonths);
+
+				if (existing is not null)
+				{
+					if (!existing.HasSameStats(currentSnapshot))
+					{
+						history.Snapshots.Remove(existing);
+						history.Snapshots.Add(currentSnapshot);
+						changed = true;
+					}
+				}
+				else
+				{
+					history.Snapshots.Add(currentSnapshot);
+					changed = true;
+				}
 			}
-		}
 
 		if (changed)
 			await SaveAsync();
@@ -75,6 +81,36 @@ public class HistoryService
 	public async Task<List<PigeonHistory>> GetAllHistoriesAsync()
 	{
 		return await LoadAsync();
+	}
+
+	public async Task DeleteSnapshotAsync(int pigeonId, int totalMonths)
+	{
+		var histories = await LoadAsync();
+		var history = histories.FirstOrDefault(h => h.PigeonId == pigeonId);
+		var snapshot = history?.Snapshots.FirstOrDefault(s => s.TotalMonths == totalMonths);
+		if (snapshot is not null)
+		{
+			history!.Snapshots.Remove(snapshot);
+			await SaveAsync();
+		}
+	}
+
+	public async Task DeletePigeonHistoryAsync(int pigeonId)
+	{
+		var histories = await LoadAsync();
+		var history = histories.FirstOrDefault(h => h.PigeonId == pigeonId);
+		if (history is not null)
+		{
+			histories.Remove(history);
+			await SaveAsync();
+		}
+	}
+
+	public async Task DeleteAllAsync()
+	{
+		var histories = await LoadAsync();
+		histories.Clear();
+		await SaveAsync();
 	}
 
 	private async Task SaveAsync()

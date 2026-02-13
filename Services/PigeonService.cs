@@ -16,6 +16,9 @@ public class PigeonService
 
 	public async Task LoadTranslationsAsync()
 	{
+		if (_firstNames is not null && _lastNames is not null)
+			return;
+
 		var response = await _authService.HttpClient.GetAsync(
 			"https://www.pigeonfancier.com/api/translation/nl");
 		response.EnsureSuccessStatusCode();

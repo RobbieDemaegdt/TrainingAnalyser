@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 using Maui2.Models;
 using Maui2.Services;
 
@@ -22,9 +23,13 @@ public class MainViewModel : INotifyPropertyChanged
 		_pigeonService = pigeonService;
 		_historyService = historyService;
 		_authService.LoggedIn += async () => await LoadAsync();
+
+		RefreshCommand = new Command(async () => await RefreshAsync());
 	}
 
 	public ObservableCollection<PigeonRow> Pigeons { get; } = [];
+
+	public ICommand RefreshCommand { get; }
 
 	public bool IsBusy
 	{
@@ -43,6 +48,20 @@ public class MainViewModel : INotifyPropertyChanged
 		if (_isLoaded || !_authService.IsLoggedIn || IsBusy)
 			return;
 
+		await FetchPigeonsAsync();
+		_isLoaded = true;
+	}
+
+	private async Task RefreshAsync()
+	{
+		if (!_authService.IsLoggedIn || IsBusy)
+			return;
+
+		await FetchPigeonsAsync();
+	}
+
+	private async Task FetchPigeonsAsync()
+	{
 		IsBusy = true;
 		ErrorMessage = null;
 
@@ -56,8 +75,6 @@ public class MainViewModel : INotifyPropertyChanged
 			await _historyService.TrackPigeonsAsync(
 				_pigeonService.LastFetchedPigeons,
 				p => _pigeonService.ResolveName(p.FirstNameId, p.LastNameId));
-
-			_isLoaded = true;
 		}
 		catch (Exception ex)
 		{

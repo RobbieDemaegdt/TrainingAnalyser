@@ -5,6 +5,12 @@
              x:Class="Maui2.Views.HistoryPage"
              Title="History">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Refresh" Command="{Binding RefreshCommand}" />
+        <ToolbarItem Text="Delete Pigeon" Command="{Binding DeletePigeonCommand}" />
+        <ToolbarItem Text="Delete All" Command="{Binding DeleteAllCommand}" />
+    </ContentPage.ToolbarItems>
+
     <Grid RowDefinitions="Auto,Auto,*" Padding="10">
 
         <Grid Grid.Row="0" ColumnDefinitions="Auto,*" Margin="0,0,0,10">
@@ -26,39 +32,60 @@
             HorizontalOptions="Center" />
 
         <ScrollView Grid.Row="2" Orientation="Horizontal">
-            <Grid RowDefinitions="Auto,*" MinimumWidthRequest="680">
+            <Grid RowDefinitions="Auto,*" MinimumWidthRequest="900">
 
                 <!-- Table Header -->
                 <Grid Grid.Row="0"
-                      ColumnDefinitions="70,90,45,45,45,45,45,45,45"
+                      ColumnDefinitions="70,90,45,45,45,45,45,45,45,45,45,45,45,40"
                       BackgroundColor="#512BD4"
                       Padding="8,6">
                     <Label Text="Age"  Grid.Column="0" FontAttributes="Bold" TextColor="White" />
                     <Label Text="Date" Grid.Column="1" FontAttributes="Bold" TextColor="White" />
-                    <Label Text="Spd"  Grid.Column="2" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
-                    <Label Text="Stm"  Grid.Column="3" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
-                    <Label Text="Nav"  Grid.Column="4" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
-                    <Label Text="Tec"  Grid.Column="5" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
-                    <Label Text="Aer"  Grid.Column="6" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
-                    <Label Text="Int"  Grid.Column="7" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
-                    <Label Text="Tot"  Grid.Column="8" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="Frm"  Grid.Column="2" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="Exp"  Grid.Column="3" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="Spd"  Grid.Column="4" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="Stm"  Grid.Column="5" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="Nav"  Grid.Column="6" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="Tec"  Grid.Column="7" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="Aer"  Grid.Column="8" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="Int"  Grid.Column="9" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="Lib"  Grid.Column="10" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="Nv"   Grid.Column="11" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="Tot"  Grid.Column="12" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text=""     Grid.Column="13" />
                 </Grid>
 
                 <!-- Table Rows -->
                 <CollectionView Grid.Row="1" ItemsSource="{Binding Snapshots}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:HistoryRow">
-                            <Grid ColumnDefinitions="70,90,45,45,45,45,45,45,45"
+                            <Grid ColumnDefinitions="70,90,45,45,45,45,45,45,45,45,45,45,45,40"
                                   Padding="8,4">
                                 <Label Text="{Binding Age}"  Grid.Column="0" />
                                 <Label Text="{Binding Date}" Grid.Column="1" />
-                                <Label Text="{Binding Spd}"  Grid.Column="2" HorizontalTextAlignment="Center" />
-                                <Label Text="{Binding Stm}"  Grid.Column="3" HorizontalTextAlignment="Center" />
-                                <Label Text="{Binding Nav}"  Grid.Column="4" HorizontalTextAlignment="Center" />
-                                <Label Text="{Binding Tec}"  Grid.Column="5" HorizontalTextAlignment="Center" />
-                                <Label Text="{Binding Aer}"  Grid.Column="6" HorizontalTextAlignment="Center" />
-                                <Label Text="{Binding Intl}" Grid.Column="7" HorizontalTextAlignment="Center" />
-                                <Label Text="{Binding Tot}"  Grid.Column="8" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                                <Label Text="{Binding Frm}"  Grid.Column="2" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding Exp}"  Grid.Column="3" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding Spd}"  Grid.Column="4" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding Stm}"  Grid.Column="5" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding Nav}"  Grid.Column="6" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding Tec}"  Grid.Column="7" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding Aer}"  Grid.Column="8" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding Intl}" Grid.Column="9" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding Lib}"  Grid.Column="10" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding Nv}"   Grid.Column="11" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding Tot}"  Grid.Column="12" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                                <Label Grid.Column="13"
+                                       Text="✕"
+                                       FontSize="12"
+                                       TextColor="Red"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeleteRowCommand}"
+                                            CommandParameter="{Binding .}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

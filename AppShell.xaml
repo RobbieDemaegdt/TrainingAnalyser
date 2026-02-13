@@ -18,6 +18,16 @@
             Title="History"
             ContentTemplate="{DataTemplate views:HistoryPage}"
             Route="HistoryPage" />
+
+        <ShellContent
+            Title="Transfers"
+            ContentTemplate="{DataTemplate views:TransferPage}"
+            Route="TransferPage" />
+
+        <ShellContent
+            Title="Sold"
+            ContentTemplate="{DataTemplate views:CompletedTransferPage}"
+            Route="CompletedTransferPage" />
     </TabBar>
 
 </Shell>

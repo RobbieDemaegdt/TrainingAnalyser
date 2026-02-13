@@ -5,6 +5,10 @@
              x:Class="Maui2.MainPage"
              Title="Your Pigeons">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Refresh" Command="{Binding RefreshCommand}" />
+    </ContentPage.ToolbarItems>
+
     <Grid RowDefinitions="Auto,Auto,*" Padding="10">
 
         <Label
@@ -27,41 +31,49 @@
             IsVisible="{Binding ErrorMessage, Converter={StaticResource IsNotNullConverter}}" />
 
         <ScrollView Grid.Row="2" Orientation="Horizontal">
-            <Grid RowDefinitions="Auto,*" MinimumWidthRequest="680">
+            <Grid RowDefinitions="Auto,*" MinimumWidthRequest="860">
 
                 <!-- Table Header -->
                 <Grid Grid.Row="0"
-                      ColumnDefinitions="180,40,70,45,45,45,45,45,45,45"
+                      ColumnDefinitions="180,40,70,45,45,45,45,45,45,45,45,45,45,45"
                       BackgroundColor="#512BD4"
                       Padding="8,6">
                     <Label Text="Name"  Grid.Column="0" FontAttributes="Bold" TextColor="White" />
                     <Label Text="Sex"   Grid.Column="1" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
                     <Label Text="Age"   Grid.Column="2" FontAttributes="Bold" TextColor="White" />
-                    <Label Text="Spd"   Grid.Column="3" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
-                    <Label Text="Stm"   Grid.Column="4" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
-                    <Label Text="Nav"   Grid.Column="5" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
-                    <Label Text="Tec"   Grid.Column="6" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
-                    <Label Text="Aer"   Grid.Column="7" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
-                    <Label Text="Int"   Grid.Column="8" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
-                    <Label Text="Tot"   Grid.Column="9" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="Frm"   Grid.Column="3" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="Exp"   Grid.Column="4" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="Spd"   Grid.Column="5" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="Stm"   Grid.Column="6" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="Nav"   Grid.Column="7" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="Tec"   Grid.Column="8" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="Aer"   Grid.Column="9" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="Int"   Grid.Column="10" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="Lib"   Grid.Column="11" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="Nv"    Grid.Column="12" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="Tot"   Grid.Column="13" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
                 </Grid>
 
                 <!-- Table Rows -->
                 <CollectionView Grid.Row="1" ItemsSource="{Binding Pigeons}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:PigeonRow">
-                            <Grid ColumnDefinitions="180,40,70,45,45,45,45,45,45,45"
+                            <Grid ColumnDefinitions="180,40,70,45,45,45,45,45,45,45,45,45,45,45"
                                   Padding="8,4">
                                 <Label Text="{Binding Name}" Grid.Column="0" LineBreakMode="TailTruncation" />
                                 <Label Text="{Binding Sex}"  Grid.Column="1" HorizontalTextAlignment="Center" />
                                 <Label Text="{Binding Age}"  Grid.Column="2" />
-                                <Label Text="{Binding Spd}"  Grid.Column="3" HorizontalTextAlignment="Center" />
-                                <Label Text="{Binding Stm}"  Grid.Column="4" HorizontalTextAlignment="Center" />
-                                <Label Text="{Binding Nav}"  Grid.Column="5" HorizontalTextAlignment="Center" />
-                                <Label Text="{Binding Tec}"  Grid.Column="6" HorizontalTextAlignment="Center" />
-                                <Label Text="{Binding Aer}"  Grid.Column="7" HorizontalTextAlignment="Center" />
-                                <Label Text="{Binding Intl}" Grid.Column="8" HorizontalTextAlignment="Center" />
-                                <Label Text="{Binding Tot}"  Grid.Column="9" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                                <Label Text="{Binding Frm}"  Grid.Column="3" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding Exp}"  Grid.Column="4" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding Spd}"  Grid.Column="5" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding Stm}"  Grid.Column="6" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding Nav}"  Grid.Column="7" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding Tec}"  Grid.Column="8" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding Aer}"  Grid.Column="9" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding Intl}" Grid.Column="10" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding Lib}"  Grid.Column="11" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding Nv}"   Grid.Column="12" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding Tot}"  Grid.Column="13" HorizontalTextAlignment="Center" FontAttributes="Bold" />
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

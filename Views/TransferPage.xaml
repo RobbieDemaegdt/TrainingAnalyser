@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:models="clr-namespace:Maui2.Models"
+			 x:Class="Maui2.Views.TransferPage"
+			 Title="Transfers">
+
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Text="Refresh" Command="{Binding RefreshCommand}" />
+	</ContentPage.ToolbarItems>
+
+	<Grid RowDefinitions="Auto,Auto,*" Padding="10">
+
+		<ActivityIndicator
+			Grid.Row="0"
+			IsRunning="{Binding IsBusy}"
+			IsVisible="{Binding IsBusy}"
+			HorizontalOptions="Center" />
+
+		<Label
+			Grid.Row="0"
+			Text="{Binding ErrorMessage}"
+			TextColor="Red"
+			IsVisible="{Binding ErrorMessage, Converter={StaticResource IsNotNullConverter}}" />
+
+		<ScrollView Grid.Row="2" Orientation="Horizontal">
+			<Grid RowDefinitions="Auto,*" MinimumWidthRequest="1110">
+
+				<!-- Table Header -->
+				<Grid Grid.Row="0"
+					  ColumnDefinitions="50,160,35,60,55,80,80,40,65,40,40,40,40,40,40,40,40,40,40,40"
+					  BackgroundColor="#512BD4"
+					  Padding="8,6">
+					<Label Text="ID"     Grid.Column="0"  FontAttributes="Bold" TextColor="White" />
+					<Label Text="Name"   Grid.Column="1"  FontAttributes="Bold" TextColor="White" />
+					<Label Text="Sex"    Grid.Column="2"  FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+					<Label Text="Age"    Grid.Column="3"  FontAttributes="Bold" TextColor="White" />
+					<Label Text="Price"  Grid.Column="4"  FontAttributes="Bold" TextColor="White" />
+					<Label Text="Seller" Grid.Column="5"  FontAttributes="Bold" TextColor="White" />
+					<Label Text="Buyer"  Grid.Column="6"  FontAttributes="Bold" TextColor="White" />
+					<Label Text="Bids"   Grid.Column="7"  FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+					<Label Text="Time"   Grid.Column="8"  FontAttributes="Bold" TextColor="White" />
+					<Label Text="Frm"    Grid.Column="9" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+					<Label Text="Exp"    Grid.Column="10" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+					<Label Text="Spd"    Grid.Column="11"  FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+					<Label Text="Stm"    Grid.Column="12" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+					<Label Text="Nav"    Grid.Column="13" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+					<Label Text="Tec"    Grid.Column="14" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+					<Label Text="Aer"    Grid.Column="15" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+					<Label Text="Int"    Grid.Column="16" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+					<Label Text="Lib"    Grid.Column="17" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+					<Label Text="Nv"     Grid.Column="18" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+					<Label Text="Tot"    Grid.Column="19" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="Center" />
+				</Grid>
+
+				<!-- Table Rows -->
+				<CollectionView Grid.Row="1" ItemsSource="{Binding Transfers}">
+					<CollectionView.ItemTemplate>
+						<DataTemplate x:DataType="models:TransferRow">
+							<Grid ColumnDefinitions="50,160,35,60,55,80,80,40,65,40,40,40,40,40,40,40,40,40,40,40"
+								  Padding="8,4">
+								<Label Text="{Binding Id}"       Grid.Column="0" />
+								<Label Text="{Binding Name}"     Grid.Column="1"  LineBreakMode="TailTruncation" />
+								<Label Text="{Binding Sex}"      Grid.Column="2"  HorizontalTextAlignment="Center" />
+								<Label Text="{Binding Age}"      Grid.Column="3" />
+								<Label Text="{Binding Price}"    Grid.Column="4" />
+								<Label Text="{Binding Seller}"   Grid.Column="5"  LineBreakMode="TailTruncation" />
+								<Label Text="{Binding Buyer}"    Grid.Column="6"  LineBreakMode="TailTruncation" />
+								<Label Text="{Binding Bids}"     Grid.Column="7"  HorizontalTextAlignment="Center" />
+								<Label Text="{Binding TimeLeft}" Grid.Column="8" />
+								<Label Text="{Binding Frm}"      Grid.Column="9" HorizontalTextAlignment="Center" />
+								<Label Text="{Binding Exp}"      Grid.Column="10" HorizontalTextAlignment="Center" />
+								<Label Text="{Binding Spd}"      Grid.Column="11"  HorizontalTextAlignment="Center" />
+								<Label Text="{Binding Stm}"      Grid.Column="12" HorizontalTextAlignment="Center" />
+								<Label Text="{Binding Nav}"      Grid.Column="13" HorizontalTextAlignment="Center" />
+								<Label Text="{Binding Tec}"      Grid.Column="14" HorizontalTextAlignment="Center" />
+								<Label Text="{Binding Aer}"      Grid.Column="15" HorizontalTextAlignment="Center" />
+								<Label Text="{Binding Intl}"     Grid.Column="16" HorizontalTextAlignment="Center" />
+								<Label Text="{Binding Lib}"      Grid.Column="17" HorizontalTextAlignment="Center" />
+								<Label Text="{Binding Nv}"       Grid.Column="18" HorizontalTextAlignment="Center" />
+								<Label Text="{Binding Tot}"      Grid.Column="19" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+							</Grid>
+						</DataTemplate>
+					</CollectionView.ItemTemplate>
+					<CollectionView.EmptyView>
+						<Label Text="No active transfers."
+							   HorizontalTextAlignment="Center"
+							   Margin="0,20"
+							   Opacity="0.6" />
+					</CollectionView.EmptyView>
+				</CollectionView>
+
+			</Grid>
+		</ScrollView>
+
+	</Grid>
+
+</ContentPage>

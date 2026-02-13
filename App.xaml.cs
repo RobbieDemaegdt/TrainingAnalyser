@@ -6,7 +6,7 @@ public partial class App : Application
 {
 	private readonly AuthService _authService;
 
-    const int WindowWidth = 1024;
+    const int WindowWidth = 1300;
     const int WindowHeight = 768;
 
     public App(AuthService authService)
