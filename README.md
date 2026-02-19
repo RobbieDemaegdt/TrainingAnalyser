@@ -1,11 +1,13 @@
 # Maui2
 
 A cross-platform application built with .NET MAUI (Multi-platform App UI).
+This application is used to get data from [Pigeon Fancier](https://pigeonfancier.com).
 
 ## Prerequisites
 
 - [.NET 10 SDK](https://dotnet.microsoft.com/download)
 - .NET MAUI workload: `dotnet workload install maui`
+- An account on [Pigeon Fancier](https://pigeonfancier.com)
 
 ## Target Platforms
 
